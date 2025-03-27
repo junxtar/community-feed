@@ -4,9 +4,15 @@ import kr.amc.amis.common.domain.PositiveIntegerCounter;
 import kr.amc.amis.post.domain.Post;
 import kr.amc.amis.post.domain.content.CommentContent;
 import kr.amc.amis.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
+
+@Builder
+@Getter
+@AllArgsConstructor
 public class Comment {
-
     private final Long id;
     private final Post post;
     private final User author;
@@ -50,5 +56,13 @@ public class Comment {
             throw new IllegalArgumentException("user is not author");
         }
         content.updateContent(updateContent);
+    }
+
+    public String getContent() {
+        return this.content.getContentText();
+    }
+
+    public Integer getLikeCount() {
+        return this.likeCount.getCount();
     }
 }

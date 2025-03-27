@@ -1,5 +1,10 @@
 package kr.amc.amis.common.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class PositiveIntegerCounter {
     private int count;
 

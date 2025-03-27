@@ -2,13 +2,19 @@ package kr.amc.amis.user.domain;
 
 import java.util.Objects;
 import kr.amc.amis.common.domain.PositiveIntegerCounter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
+@Getter
+@Builder
+@AllArgsConstructor
 public class User {
 
-    private final Long id;
-    private final UserInfo userInfo;
-    private final PositiveIntegerCounter followingCount;
-    private final PositiveIntegerCounter followerCount;
+    private Long id;
+    private UserInfo userInfo;
+    private PositiveIntegerCounter followingCount;
+    private PositiveIntegerCounter followerCount;
 
     public User(Long id, UserInfo userInfo) {
         if (userInfo == null) {
@@ -21,8 +27,12 @@ public class User {
         this.followerCount = new PositiveIntegerCounter();
     }
 
-    public Long getId() {
-        return id;
+    public String getUserName() {
+        return userInfo.getName();
+    }
+
+    public String getProfileImageUrl() {
+        return userInfo.getProfileImageUrl();
     }
 
     public int followerCount() {
@@ -52,6 +62,7 @@ public class User {
     private void increaseFollowerCount() {
         followerCount.increase();
     }
+
     private void decreaseFollowerCount() {
         followerCount.decrease();
     }

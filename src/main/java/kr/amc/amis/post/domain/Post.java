@@ -2,12 +2,18 @@ package kr.amc.amis.post.domain;
 
 import kr.amc.amis.common.domain.PositiveIntegerCounter;
 import kr.amc.amis.post.domain.content.Content;
-import kr.amc.amis.post.domain.content.PostContent;
 import kr.amc.amis.post.domain.content.PostPublicationState;
 import kr.amc.amis.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
+
+
+@Builder
+@Getter
+@AllArgsConstructor
 public class Post {
-
     private final Long id;
     private final User author;
     private final Content postContent;
@@ -57,5 +63,9 @@ public class Post {
 
     public int getLikeCount() {
         return likeCount.getCount();
+    }
+
+    public String getContent() {
+        return this.postContent.getContentText();
     }
 }
