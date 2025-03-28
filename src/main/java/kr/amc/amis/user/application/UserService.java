@@ -20,7 +20,8 @@ public class UserService {
     }
 
     public User getUser(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("user not found"));
+//        return userRepository.findById(userId)
+//                .orElseThrow(() -> new IllegalArgumentException("user not found"));
+        return userRepository.findById(userId);
     }
 }
