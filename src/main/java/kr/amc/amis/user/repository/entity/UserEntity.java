@@ -13,12 +13,14 @@ import kr.amc.amis.user.domain.UserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "community_user")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicUpdate
 public class UserEntity extends TimeBaseEntity {
 
     @Id
@@ -39,9 +41,10 @@ public class UserEntity extends TimeBaseEntity {
 
     public User toUser() {
         return User.builder()
+                .id(id)
                 .userInfo(new UserInfo(this.name, this.profileImage))
                 .followerCount(new PositiveIntegerCounter(this.followerCount))
-                .followerCount(new PositiveIntegerCounter(this.followingCount))
+                .followingCount(new PositiveIntegerCounter(this.followingCount))
                 .build();
     }
 }

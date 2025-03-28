@@ -3,7 +3,9 @@ package kr.amc.amis.user.application;
 import kr.amc.amis.user.application.dto.FollowUserRequestDto;
 import kr.amc.amis.user.application.interfaces.UserRelationRepository;
 import kr.amc.amis.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserRelationService {
 
     private final UserService userService;
