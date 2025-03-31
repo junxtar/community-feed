@@ -21,9 +21,13 @@ dependencies {
     //lombok
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+
+    // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("io.rest-assured:rest-assured:5.5.0")
+    runtimeOnly("com.h2database:h2")
 
     // querydsl
     implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
