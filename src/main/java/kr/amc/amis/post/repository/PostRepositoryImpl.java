@@ -4,6 +4,7 @@ import kr.amc.amis.post.application.interfaces.PostRepository;
 import kr.amc.amis.post.domain.Post;
 import kr.amc.amis.post.repository.entity.post.PostEntity;
 import kr.amc.amis.post.repository.jpa.JpaPostRepository;
+import kr.amc.amis.post.repository.post_queue.UserPostQueueCommandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostRepositoryImpl implements PostRepository {
 
     private final JpaPostRepository jpaPostRepository;
+    private final UserPostQueueCommandRepository userPostQueueCommandRepository;
 
     @Override
     @Transactional
@@ -22,8 +24,9 @@ public class PostRepositoryImpl implements PostRepository {
             jpaPostRepository.updatePostEntity(postEntity);
             return postEntity.toPost();
         }
-        PostEntity save = jpaPostRepository.save(postEntity);
-        return save.toPost();
+        postEntity = jpaPostRepository.save(postEntity);
+        userPostQueueCommandRepository.publishPost(postEntity);
+        return postEntity.toPost();
     }
 
     @Override

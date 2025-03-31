@@ -1,6 +1,7 @@
 package kr.amc.amis.user.repository;
 
 import java.util.List;
+import kr.amc.amis.post.repository.post_queue.UserPostQueueCommandRepository;
 import kr.amc.amis.user.application.interfaces.UserRelationRepository;
 import kr.amc.amis.user.domain.User;
 import kr.amc.amis.user.repository.entity.UserEntity;
@@ -18,6 +19,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
 
     private final JpaUserRelationRepository jpaUserRelationRepository;
     private final JpaUserRepository jpaUserRepository;
+    private final UserPostQueueCommandRepository userPostQueueCommandRepository;
 
     @Override
     public boolean isAlreadyFollow(User user, User targetUser) {
@@ -34,6 +36,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
                 targetUser.getId());
         jpaUserRelationRepository.save(userRelationEntity);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        userPostQueueCommandRepository.saveFollowPost(user.getId(), targetUser.getId());
     }
 
     @Override
@@ -43,5 +46,6 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
                 targetUser.getId());
         jpaUserRelationRepository.deleteById(userRelationIdEntity);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        userPostQueueCommandRepository.deleteUnfollowPost(user.getId(), targetUser.getId());
     }
 }

@@ -1,5 +1,6 @@
 package kr.amc.amis.post.repository.jpa;
 
+import java.util.List;
 import kr.amc.amis.post.repository.entity.post.PostEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,8 +18,18 @@ public interface JpaPostRepository extends JpaRepository<PostEntity, Long> {
 
     @Modifying
     @Query(value = "UPDATE PostEntity p "
-            + "SET p.likeCount = :#{#postEntity.getLikeCount()}, "
+            + "SET p.likeCount = p.likeCount + :likeCount, "
             + "p.updDt = now() "
-            + "WHERE p.id = :#{#postEntity.getId()}")
-    void updateLikeCount(PostEntity postEntity);
+            + "WHERE p.id = :postId")
+    void updateLikeCount(Long postId, Integer likeCount);
+
+    @Modifying
+    @Query(value = "UPDATE PostEntity p "
+            + "SET p.commentCount = p.commentCount + 1, "
+            + "p.updDt = now() "
+            + "WHERE p.id = :postEntityId")
+    void increaseCommentCount(Long postEntityId);
+
+    @Query("SELECT p.id FROM PostEntity p WHERE p.author.id = :authorId")
+    List<Long> findAllPostIdsByAuthorId(Long authorId);
 }
