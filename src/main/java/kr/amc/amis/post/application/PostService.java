@@ -10,7 +10,9 @@ import kr.amc.amis.post.domain.content.Content;
 import kr.amc.amis.post.domain.content.PostContent;
 import kr.amc.amis.user.application.UserService;
 import kr.amc.amis.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PostService {
 
     private final PostRepository postRepository;
@@ -25,8 +27,7 @@ public class PostService {
     }
 
     public Post getPost(Long id) {
-        return postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("post not found"));
+        return postRepository.findById(id);
     }
 
     public Post createPost(CreatePostRequestDto dto) {
@@ -37,8 +38,8 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public Post updatePost(UpdatePostRequestDto dto) {
-        Post post = getPost(dto.postId());
+    public Post updatePost(Long postId, UpdatePostRequestDto dto) {
+        Post post = getPost(postId);
         User user = userService.getUser(dto.userId());
 
         post.updatePost(user, dto.content(), dto.state());

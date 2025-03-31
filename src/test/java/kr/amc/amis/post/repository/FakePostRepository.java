@@ -2,7 +2,6 @@ package kr.amc.amis.post.repository;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import kr.amc.amis.post.application.interfaces.PostRepository;
 import kr.amc.amis.post.domain.Post;
 
@@ -16,7 +15,7 @@ public class FakePostRepository implements PostRepository {
     }
 
     @Override
-    public Optional<Post> findById(Long id) {
-        return Optional.empty();
+    public Post findById(Long id) {
+        return null;
     }
 }

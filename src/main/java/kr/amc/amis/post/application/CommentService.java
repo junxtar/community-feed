@@ -9,7 +9,9 @@ import kr.amc.amis.post.domain.Post;
 import kr.amc.amis.post.domain.comment.Comment;
 import kr.amc.amis.user.application.UserService;
 import kr.amc.amis.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentService {
 
     private final CommentRepository commentRepository;
@@ -26,8 +28,7 @@ public class CommentService {
     }
 
     public Comment getComment(Long id) {
-        return commentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+        return commentRepository.findById(id);
     }
 
     public Comment createComment(CreateCommentRequestDto dto) {
@@ -38,8 +39,8 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public Comment updateComment(UpdateCommentRequestDto dto) {
-        Comment comment = getComment(dto.commentId());
+    public Comment updateComment(Long commentId, UpdateCommentRequestDto dto) {
+        Comment comment = getComment(commentId);
         User user = userService.getUser(dto.userId());
 
         comment.updateComment(user, dto.content());
