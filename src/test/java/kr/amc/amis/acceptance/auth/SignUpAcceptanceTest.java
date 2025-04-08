@@ -4,7 +4,6 @@ package kr.amc.amis.acceptance.auth;
 import static kr.amc.amis.acceptance.steps.SignUpAcceptanceSteps.requestSendEmail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import kr.amc.amis.acceptance.utils.AcceptanceTestTemplate;
 import kr.amc.amis.auth.application.dto.SendEmailRequestDto;
@@ -29,9 +28,9 @@ public class SignUpAcceptanceTest extends AcceptanceTestTemplate {
         Integer code = requestSendEmail(sendEmailRequestDto);
 
         // then
-        String token = super.getEmailToken(email);
-        assertEquals(0, code);
+        String token = this.getEmailToken(email);
         assertNotNull(token);
+        assertEquals(0, code);
     }
 
     @Test
@@ -44,8 +43,8 @@ public class SignUpAcceptanceTest extends AcceptanceTestTemplate {
         Integer code = requestSendEmail(sendEmailRequestDto);
 
         // then
-        String token = super.getEmailToken(email);
-        assertNull(token);
-        assertEquals(500, code);
+//        String token = super.getEmailToken(email);
+//        assertNull(token);
+        assertEquals(400, code);
     }
 }

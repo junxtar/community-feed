@@ -24,9 +24,8 @@ public class DataLoader {
         followUser(new FollowUserRequestDto(1L, 2L));
         followUser(new FollowUserRequestDto(1L, 3L));
     }
-
     public String getEmailToken(String email) {
-        return entityManager.createNativeQuery("SELECT token FROM community_emial_verification WHERE email = ?", String.class)
+        return entityManager.createNativeQuery("SELECT token FROM community_email_verification WHERE email = ?", String.class)
                 .setParameter(1, email)
                 .getSingleResult()
                 .toString();

@@ -16,7 +16,5 @@ public class SignUpAcceptanceSteps {
                 .then()
                 .extract()
                 .jsonPath().get("code");
-
-
     }
 }
