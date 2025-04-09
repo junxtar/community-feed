@@ -8,7 +8,6 @@ public class RandomTokenGenerator {
     private static final int TOKEN_LENGTH = 16;
     private static final SecureRandom random = new SecureRandom();
 
-
     private RandomTokenGenerator() {
     }
 

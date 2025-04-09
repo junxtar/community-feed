@@ -2,6 +2,7 @@ package kr.amc.amis.auth.repository;
 
 import kr.amc.amis.auth.application.interfaces.EmailSendRepository;
 import kr.amc.amis.auth.domain.Email;
+import kr.amc.amis.auth.repository.jpa.JpaEmailVerificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

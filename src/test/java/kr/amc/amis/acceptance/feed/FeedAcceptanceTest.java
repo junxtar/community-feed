@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 public class FeedAcceptanceTest extends AcceptanceTestTemplate {
 
+    private String token;
     /**
      * User 1 --- follow --> User 2
      * User 1 --- follow --> User 3
@@ -25,6 +26,8 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
     @BeforeEach
     void setUp() {
         super.init();
+        this.token = login("user1@email.com");
+
     }
 
     /**
@@ -40,7 +43,7 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
         Long postId = requestCreatePost(dto);
 
         // when, 팔로워 피드를 요청
-        List<GetPostContentResponseDto> result = requestFeed(1L);
+        List<GetPostContentResponseDto> result = requestFeed(token);
 
         // then
         assertEquals(1, result.size());
@@ -57,7 +60,7 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
         likePost(new LikeRequestDto(postId, 1L));
 
         // when
-        List<GetPostContentResponseDto> result = requestFeed(1L);
+        List<GetPostContentResponseDto> result = requestFeed(token);
 
         // then
         assertEquals(1, result.size());

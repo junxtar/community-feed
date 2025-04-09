@@ -21,5 +21,11 @@ public class EmailService {
         String token = RandomTokenGenerator.generateToken();
 
         emailSendRepository.sendEmail(email, token);
+        emailVerificationRepository.createEmailVerification(email, token);
+    }
+
+    public void verifyEmail(String email, String token) {
+        Email emailValue = Email.createEmail(email);
+        emailVerificationRepository.verifyEmail(emailValue, token);
     }
 }

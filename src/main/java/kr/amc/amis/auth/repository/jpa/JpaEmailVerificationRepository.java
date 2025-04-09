@@ -1,4 +1,4 @@
-package kr.amc.amis.auth.repository;
+package kr.amc.amis.auth.repository.jpa;
 
 import java.util.Optional;
 import kr.amc.amis.auth.repository.entity.EmailVerificationEntity;
