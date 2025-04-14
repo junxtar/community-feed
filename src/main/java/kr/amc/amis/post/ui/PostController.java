@@ -1,6 +1,5 @@
 package kr.amc.amis.post.ui;
 
-import kr.amc.amis.common.idenpotency.Idempotent;
 import kr.amc.amis.post.application.PostService;
 import kr.amc.amis.post.application.dto.CreatePostRequestDto;
 import kr.amc.amis.post.application.dto.LikeRequestDto;

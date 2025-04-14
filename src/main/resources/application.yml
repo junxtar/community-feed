@@ -15,4 +15,7 @@ spring:
         format_sql: true
     open-in-view: false
 
-secret-key: thisissecretkeythisissecretkeythisissecretkeythisissecretkeythisissecretkeythisissecretkeythisissecretkeythisissecretkey
+secret-key:
+
+fcm:
+  certification: fast-campus-adminsdk.json
