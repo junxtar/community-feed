@@ -1,6 +1,8 @@
 package kr.amc.amis.admin.ui;
 
 import kr.amc.amis.admin.ui.dto.GetTableListResponse;
+import kr.amc.amis.admin.ui.dto.posts.GetPostTableRequestDto;
+import kr.amc.amis.admin.ui.dto.posts.GetPostTableResponseDto;
 import kr.amc.amis.admin.ui.dto.users.GetUserTableRequestDto;
 import kr.amc.amis.admin.ui.dto.users.GetUserTableResponseDto;
 import kr.amc.amis.admin.ui.query.AdminTableQueryRepository;
@@ -41,4 +43,17 @@ public class AdminController {
 
         return modelAndView;
     }
+
+    @GetMapping("/posts")
+    public ModelAndView posts(GetPostTableRequestDto dto) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("posts");
+        GetTableListResponse<GetPostTableResponseDto> result = adminTableQueryRepository.getPostTableData(dto);
+        modelAndView.addObject("requestDto", dto);
+        modelAndView.addObject("postList", result.getTableData());
+        modelAndView.addObject("totalCount", result.getTotalCount());
+
+        return modelAndView;
+    }
+
 }

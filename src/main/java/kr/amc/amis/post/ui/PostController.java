@@ -1,5 +1,6 @@
 package kr.amc.amis.post.ui;
 
+import kr.amc.amis.common.idenpotency.Idempotent;
 import kr.amc.amis.post.application.PostService;
 import kr.amc.amis.post.application.dto.CreatePostRequestDto;
 import kr.amc.amis.post.application.dto.LikeRequestDto;
@@ -37,6 +38,7 @@ public class PostController {
         return Response.ok(post.getId());
     }
 
+    @Idempotent
     @PostMapping("/like")
     public Response<Void> likePost(@RequestBody LikeRequestDto dto) {
         postService.likePost(dto);
