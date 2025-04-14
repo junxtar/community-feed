@@ -30,6 +30,17 @@ public class AdminTableQueryRepositoryImpl implements AdminTableQueryRepository 
                 .fetch()
                 .size();
 
+
+        List<Long> ids = queryFactory.select(userEntity.id)
+                .from(userEntity)
+                .where(
+                        likeName(dto.getName())
+                )
+                .orderBy(userEntity.id.desc())
+                .offset(dto.getOffset())
+                .limit(dto.getLimit())
+                .fetch();
+
         List<GetUserTableResponseDto> result = queryFactory.select(
                         Projections.fields(
                                 GetUserTableResponseDto.class,
@@ -44,10 +55,8 @@ public class AdminTableQueryRepositoryImpl implements AdminTableQueryRepository 
                 )
                 .from(userEntity)
                 .join(userAuthEntity).on(userAuthEntity.userId.eq(userEntity.id))
-                .where(likeName(dto.getName()))
+                .where(userEntity.id.in(ids))
                 .orderBy(userEntity.id.desc())
-                .offset(dto.getOffset())
-                .limit(dto.getLimit())
                 .fetch();
 
         return new GetTableListResponse<>(total, result);
