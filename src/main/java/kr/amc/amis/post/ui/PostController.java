@@ -1,5 +1,6 @@
 package kr.amc.amis.post.ui;
 
+import kr.amc.amis.common.idenpotency.Idempotent;
 import kr.amc.amis.post.application.PostService;
 import kr.amc.amis.post.application.dto.CreatePostRequestDto;
 import kr.amc.amis.post.application.dto.LikeRequestDto;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostController {
 
     private final PostService postService;
-
 
     @PostMapping
     public Response<Long> createPost(@RequestBody CreatePostRequestDto dto) {
